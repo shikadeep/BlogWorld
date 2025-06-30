@@ -27,12 +27,6 @@ const BlogDetail = () => {
       {/* Navigation Links */}
       <div className="flex justify-between items-center mb-6">
         <Link
-          to={`/dashboard/${blog.user}`}
-          className="text-blue-600 font-medium hover:underline bg-gray-100 px-3 py-1 rounded-md shadow-sm"
-        >
-          ← Admin Dashboard
-        </Link>
-        <Link
           to="/"
           className="text-blue-600 font-medium hover:underline bg-gray-100 px-3 py-1 rounded-md shadow-sm"
         >
