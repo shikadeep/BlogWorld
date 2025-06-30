@@ -39,7 +39,7 @@ const BlogDetail = () => {
         <img
           src={`${import.meta.env.VITE_BACKEND}/${blog.image.replace(/\\/g, '/')}`}
           alt={blog.title}
-          className="w-full h-64 object-cover rounded-lg mb-6 shadow"
+          className="w-2xl h-72 mx-4 object-cover rounded-lg mb-6 shadow"
         />
       )}
 

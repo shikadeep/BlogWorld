@@ -54,14 +54,14 @@ const Home = () => {
   }, []);
 
   const filteredBlogs = blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(search.toLowerCase()) ||
-    blog.author.toLowerCase().includes(search.toLowerCase()) ||
+    blog.title?.toLowerCase().includes(search.toLowerCase()) ||
+    blog.author?.toLowerCase().includes(search.toLowerCase()) ||
     blog.tags?.some((tag) => tag.toLowerCase().includes(search.toLowerCase()))
   );
 
   const sortedBlogs = [...filteredBlogs].sort((a, b) => {
-    if (sortOption === 'latest') return new Date(b.date) - new Date(a.date);
-    if (sortOption === 'oldest') return new Date(a.date) - new Date(b.date);
+    if (sortOption === 'latest') return new Date(b.date) - new Date(a.date); // Most recent first
+    if (sortOption === 'oldest') return new Date(a.date) - new Date(b.date); // Oldest first
     if (sortOption === 'likes') return (b.likes || 0) - (a.likes || 0);
     return 0;
   });
@@ -126,9 +126,9 @@ const Home = () => {
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 
             {currentBlogs.map((blog) => (
-              
+
               <div
-              key={blog._id}
+                key={blog._id}
                 className="bg-white rounded-lg overflow-hidden shadow hover:shadow-xl transition duration-300"
               >
                 <img
@@ -197,8 +197,8 @@ const Home = () => {
                 key={index}
                 onClick={() => setCurrentPage(index + 1)}
                 className={`px-3 py-1 rounded ${currentPage === index + 1
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-200 hover:bg-gray-300'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300'
                   }`}
               >
                 {index + 1}
