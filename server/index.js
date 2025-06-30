@@ -10,7 +10,6 @@ const app = express();
 const path = require('path');
 
 dotenv.config(); //env fie
-const port = 5050 || process.env.PORT
 require('./db'); //connent DB
 
 app.use(cors()); //middleware
@@ -32,6 +31,5 @@ app.get('/api/protected', authMiddleware, (req, res)=>{
 //   res.send("welcome")
 // })
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 5050;
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
