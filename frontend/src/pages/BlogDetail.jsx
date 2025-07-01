@@ -22,15 +22,15 @@ const BlogDetail = () => {
   if (!blog) return <p className="text-center mt-10 text-gray-500">Loading blog...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 bg-white shadow-lg rounded-xl">
+    <div className="max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white shadow-md rounded-xl">
       
-      {/* Navigation Links */}
+      {/* Navigation */}
       <div className="flex justify-between items-center mb-6">
         <Link
           to="/"
           className="text-blue-600 font-medium hover:underline bg-gray-100 px-3 py-1 rounded-md shadow-sm"
         >
-          Home
+          ← Home
         </Link>
       </div>
 
@@ -39,20 +39,20 @@ const BlogDetail = () => {
         <img
           src={`${import.meta.env.VITE_BACKEND}/${blog.image.replace(/\\/g, '/')}`}
           alt={blog.title}
-          className="w-2xl h-72 mx-4 object-cover rounded-lg mb-6 shadow"
+          className="w-full h-64 object-cover rounded-lg mb-6 shadow-sm"
         />
       )}
 
-      {/* Blog Title & Meta */}
-      <h1 className="text-4xl font-extrabold text-gray-800 mb-3">{blog.title}</h1>
+      {/* Title and Meta */}
+      <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-800 mb-3">{blog.title}</h1>
       <p className="text-sm text-gray-500 mb-6">
         By <span className="font-medium">{blog.author}</span> ·{' '}
         {new Date(blog.date).toLocaleDateString()}
       </p>
 
-      {/* Blog Content */}
+      {/* Content */}
       <div
-        className="prose max-w-none prose-lg text-gray-800 leading-relaxed"
+        className="prose prose-sm sm:prose-base lg:prose-lg max-w-none text-gray-800 leading-relaxed"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 

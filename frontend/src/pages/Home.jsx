@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -60,8 +59,8 @@ const Home = () => {
   );
 
   const sortedBlogs = [...filteredBlogs].sort((a, b) => {
-    if (sortOption === 'latest') return new Date(b.date) - new Date(a.date); // Most recent first
-    if (sortOption === 'oldest') return new Date(a.date) - new Date(b.date); // Oldest first
+    if (sortOption === 'latest') return new Date(b.date) - new Date(a.date);
+    if (sortOption === 'oldest') return new Date(a.date) - new Date(b.date);
     if (sortOption === 'likes') return (b.likes || 0) - (a.likes || 0);
     return 0;
   });
@@ -76,23 +75,21 @@ const Home = () => {
   const totalPages = Math.ceil(tagFilteredBlogs.length / blogsPerPage);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Top Bar */}
-        <div className="flex justify-between items-center mb-6 flex-col sm:flex-row gap-4 sm:gap-0">
-          <h1 className="text-3xl font-bold text-blue-700">Latest Blogs</h1>
-          <div className="flex gap-4">
-            <Link
-              to="/login"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm"
-            >
-              Login
-            </Link>
-          </div>
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+          <h1 className="text-2xl sm:text-3xl font-bold text-blue-700">Latest Blogs</h1>
+          <Link
+            to="/login"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm transition"
+          >
+            Login
+          </Link>
         </div>
 
         {/* Search and Sort */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-6">
           <input
             type="text"
             value={search}
@@ -119,17 +116,15 @@ const Home = () => {
           )}
         </div>
 
-        {/* Blog List */}
+        {/* Blog Cards */}
         {currentBlogs.length === 0 ? (
           <p className="text-center text-gray-500">No blogs found</p>
         ) : (
-          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {currentBlogs.map((blog) => (
-
               <div
                 key={blog._id}
-                className="bg-white rounded-lg overflow-hidden shadow hover:shadow-xl transition duration-300"
+                className="bg-white rounded-lg shadow hover:shadow-xl transition duration-300 overflow-hidden"
               >
                 <img
                   src={
@@ -140,11 +135,11 @@ const Home = () => {
                   alt={blog.title}
                   className="w-full h-48 object-cover"
                 />
-                <div className="p-5">
+                <div className="p-4">
                   <Link to={`/blog/${blog._id}`}>
                     <h3 className="text-lg font-semibold text-gray-800 hover:text-blue-600 transition">{blog.title}</h3>
                   </Link>
-                  <p className="text-sm text-gray-600 line-clamp-3">
+                  <p className="text-sm text-gray-600 line-clamp-3 mt-1">
                     {blog.content?.replace(/<[^>]+>/g, '') || 'No content available'}
                   </p>
 
@@ -186,17 +181,16 @@ const Home = () => {
               </div>
             ))}
           </div>
-
         )}
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center mt-8 gap-2">
+          <div className="flex justify-center mt-10 flex-wrap gap-2">
             {[...Array(totalPages)].map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentPage(index + 1)}
-                className={`px-3 py-1 rounded ${currentPage === index + 1
+                className={`px-3 py-1 rounded text-sm ${currentPage === index + 1
                   ? 'bg-blue-500 text-white'
                   : 'bg-gray-200 hover:bg-gray-300'
                   }`}
